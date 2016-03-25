@@ -8,6 +8,20 @@ var nav = [{
 	Link: '/Authors',
 	Text: 'Author'
 }];
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'root',
+	database: 'pluralsight_books'
+});
+connection.connect(function (err) {
+	if(err){
+		console.log('error connecting ' + err.stack);
+		return;
+	}
+	console.log('connected as id ' + connection.threadId)
+});
 var bookRouter = require('./src/routes/bookRoutes')(nav);
 //var handlebars = require('express-handlebars'); // handlebars needs to be required whereas ejs and jade do not
 //app.engine('.hbs', handlebars({extname: '.hbs'})); //this sets the engine to handlebars
